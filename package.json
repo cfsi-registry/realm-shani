@@ -2,7 +2,7 @@
   "name": "shani",
   "version": "0.1.0",
   "description": "Testing framework",
-  "author": "Maximus <smaxim@ciferox.com>",
+  "author": "ADONE core team <info@adone.io>",
   "devDependencies": {
     "eslint": "latest",
     "babel-eslint": "latest",
