@@ -2,13 +2,14 @@ const {
     is,
     error,
     lazify,
-    hrtime,
     util,
     std,
     text: {
         unicode: { symbol }
     }
 } = adone;
+
+const { hrtime } = process;
 
 const shani = lazify({
     util: "./util"
