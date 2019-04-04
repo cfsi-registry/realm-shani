@@ -446,7 +446,7 @@ class Block {
     }
 }
 
-class TestModule extends adone.js.Module {
+class TestModule extends adone.module.Module {
     // use native require to require external modules
     loadExtension(filename, extension) {
         if (filename.includes("node_modules")) {
@@ -1539,7 +1539,7 @@ export class Engine {
                 const content = contentCache.get(filename);
                 module._compile(content, filename);
             };
-            const transpile = adone.js.Module.transforms.transpile(this.transpilerOptions);
+            const transpile = adone.module.Module.transforms.transpile(this.transpilerOptions);
             const transform = (content, filename) => {
                 if (!transpiledCache.has(filename)) {
                     transpiledCache.set(filename, transpile(content, filename));
@@ -1675,7 +1675,7 @@ export class Engine {
                 }
 
                 try {
-                    m.loadItself();
+                    m.load(m.id);
                 } catch (err) {
                     err.message = `Error while loading this file: ${path}\n${err.message}`;
                     emitter.emit("error", wrapError(err));
@@ -1711,7 +1711,7 @@ export class Engine {
                     });
                 } finally {
                     done = true;
-                    m.cache.delete(path);
+                    m.uncache(path);
                     if (this.callGc) {
                         callGc();
                     }
