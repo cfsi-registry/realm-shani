@@ -850,7 +850,7 @@ class ExternalRunner {
     }
 
     async startProcess() {
-        this.proc = std.child_process.fork(std.path.resolve(__dirname, "external_runner.js"), [adone.ROOT_PATH], {
+        this.proc = std.childProcess.fork(std.path.resolve(__dirname, "external_runner.js"), [adone.ROOT_PATH], {
             stdio: ["inherit", "inherit", "inherit", "ipc"]
         });
         this.exitPromise = new Promise((resolve) => this.proc.once("exit", (code, signal) => resolve({ code, signal })));

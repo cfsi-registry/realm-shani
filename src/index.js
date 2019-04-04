@@ -4,7 +4,7 @@ const {
         mainCommand
     },
     cli,
-    std: { path, child_process: cp },
+    std: { path, childProcess },
     system
 } = adone;
 
@@ -206,7 +206,7 @@ export default class ShaniCLI extends Subsystem {
         if (opts.has("inspect")) {
             execArgv.push(`--inspect=${opts.get("inspect")}`, "--inspect-brk");
         }
-        const proc = cp.fork(path.resolve(__dirname, "runner.js"), [adone.ROOT_PATH], {
+        const proc = childProcess.fork(path.resolve(__dirname, "runner.js"), [adone.ROOT_PATH], {
             stdio: ["inherit", "inherit", "inherit", "ipc"],
             execArgv
         });

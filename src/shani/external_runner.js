@@ -1,6 +1,6 @@
 require(process.argv[2]); // the main process passes adone's absolute path
 
-adone.sourcemap.support(Error).install();
+adone.sourcemap.support.install();
 
 // if i use adone.app.runCli sometimes it requires "Enter" in console after exit
 
