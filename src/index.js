@@ -5,7 +5,6 @@ const {
     },
     cli,
     std: { path, childProcess },
-    system
 } = adone;
 
 export default class ShaniCLI extends Subsystem {
@@ -234,7 +233,7 @@ export default class ShaniCLI extends Subsystem {
                     }
                     case "C-c": {
                         // immediate exit
-                        await system.process.kill(proc.pid, { force: true, tree: true });
+                        await adone.process.kill(proc.pid, { force: true, tree: true });
                         break;
                     }
                 }

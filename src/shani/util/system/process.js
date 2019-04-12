@@ -1,5 +1,4 @@
 const {
-    system,
     std: { path },
     util
 } = adone;
@@ -7,7 +6,7 @@ const {
 const jsProcessContainerPath = path.resolve(__dirname, "process_container.js");
 
 export const fork = (script, args = [], opts = {}) => {
-    return system.process.exec(process.execPath, [
+    return adone.process.exec(process.execPath, [
         ...process.execArgv,
         jsProcessContainerPath,
         ...args
@@ -20,7 +19,7 @@ export const fork = (script, args = [], opts = {}) => {
 };
 
 export const forkSync = (script, args = [], opts = {}) => {
-    return system.process.execSync(process.execPath, [
+    return adone.process.execSync(process.execPath, [
         ...process.execArgv,
         jsProcessContainerPath,
         ...args

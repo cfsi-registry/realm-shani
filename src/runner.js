@@ -15,7 +15,6 @@ const {
 const {
     is,
     std: { path },
-    system,
     noop
 } = adone;
 
@@ -165,10 +164,10 @@ adone.app.run({
             }
         }
 
-        const children = await system.process.getChildPids(process.pid);
+        const children = await adone.process.getChildPids(process.pid);
 
         await Promise.all(children.map(async ({ PID }) => {
-            await system.process.kill(PID, { force: true, tree: false }).catch(noop);
+            await adone.process.kill(PID, { force: true, tree: false }).catch(noop);
         }));
 
         if (failed) {
