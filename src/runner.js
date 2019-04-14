@@ -15,7 +15,8 @@ const {
 const {
     is,
     std: { path },
-    noop
+    noop,
+    util: { arrify }
 } = adone;
 
 adone.app.run({
@@ -47,6 +48,10 @@ adone.app.run({
             if (config.__esModule) { // TODO: fix?
                 config = config.default;
             }
+        }
+
+        for (const req of arrify(config.require)) {
+            require(req);
         }
 
         config.options = config.options || {};

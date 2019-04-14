@@ -723,7 +723,7 @@ class Test {
     }
 
     after(description, callback) {
-        if (adone.is.function(description)) {
+        if (is.function(description)) {
             [description, callback] = ["", description];
         }
         const hook = new Hook(this.block, description, callback, this.runtimeContext, this.meta); // use current test location ??
@@ -732,7 +732,7 @@ class Test {
     }
 
     before(description, callback) {
-        if (adone.is.function(description)) {
+        if (is.function(description)) {
             [description, callback] = ["", description];
         }
         const hook = new Hook(this.block, description, callback, this.runtimeContext, this.meta); // use current test location ??
@@ -1014,7 +1014,7 @@ export class Engine {
         }, ["skip", "only", "slow", "todo"]);
 
         const before = (description, callback) => {
-            if (adone.is.function(description)) {
+            if (is.function(description)) {
                 [description, callback] = ["", description];
             }
             const meta = { location: getCurrentLocation() };
@@ -1023,7 +1023,7 @@ export class Engine {
         };
 
         const after = (description, callback) => {
-            if (adone.is.function(description)) {
+            if (is.function(description)) {
                 [description, callback] = ["", description];
             }
             const meta = { location: getCurrentLocation() };
@@ -1032,7 +1032,7 @@ export class Engine {
         };
 
         const beforeEach = (description, callback) => {
-            if (adone.is.function(description)) {
+            if (is.function(description)) {
                 [description, callback] = ["", description];
             }
             const meta = { location: getCurrentLocation() };
@@ -1041,7 +1041,7 @@ export class Engine {
         };
 
         const afterEach = (description, callback) => {
-            if (adone.is.function(description)) {
+            if (is.function(description)) {
                 [description, callback] = ["", description];
             }
             const meta = { location: getCurrentLocation() };
@@ -1599,8 +1599,7 @@ export class Engine {
                 }
             };
 
-            stub.stub(console, "log", "error", "debug", "info", "dir", "warn");
-            stub.stub(adone, "log", "logFatal", "logError", "logWarn", "logInfo", "logDebug", "logTrace");
+            stub.stub(console, "log", "error", "debug", "info", "dir", "warn", "trace", "table");
 
             for (const path of (await adone.fs.glob(paths)).sort()) {
                 const context = this.context();
@@ -2023,7 +2022,7 @@ export const consoleReporter = ({
                             log(adone.text.indent(err.diff, 2));
                         }
                         log();
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = filterShaniFrames(err.stack.split("\n")).slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2045,7 +2044,7 @@ export const consoleReporter = ({
                             log(`{red-fg}{escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2070,7 +2069,7 @@ export const consoleReporter = ({
                             log(`{magenta-fg}{escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2088,7 +2087,7 @@ export const consoleReporter = ({
                             log(`{#ff9500-fg}${idx}) {escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2294,7 +2293,7 @@ export const minimalReporter = () => {
                             log(adone.text.indent(err.diff, 2));
                         }
                         log();
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = filterShaniFrames(err.stack.split("\n")).slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2312,7 +2311,7 @@ export const minimalReporter = () => {
                             log(`{#ff9500-fg}${idx}) {escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2543,7 +2542,7 @@ export const simpleReporter = ({
                             log();
                             log(adone.text.indent(err.diff, 2));
                         }
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = filterShaniFrames(err.stack.split("\n")).slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2566,7 +2565,7 @@ export const simpleReporter = ({
                             log(`{red-fg}{escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2591,7 +2590,7 @@ export const simpleReporter = ({
                             log(`{magenta-fg}{escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }
@@ -2609,7 +2608,7 @@ export const simpleReporter = ({
                             log(`{#ff9500-fg}${idx}) {escape}${err}{/escape}{/}`);
                         }
 
-                        if (adone.is.string(err.stack)) {
+                        if (is.string(err.stack)) {
                             const stackMsg = err.stack.split("\n").slice(1).map((x) => `    ${x.trim()}`).join("\n");
                             log(`{grey-fg}{escape}${stackMsg}{/escape}{/}`);
                         }

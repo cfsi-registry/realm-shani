@@ -1,7 +1,7 @@
 {
   "name": "shani",
-  "version": "0.1.0",
-  "description": "Testing framework",
+  "version": "0.1.1",
+  "description": "Test framework",
   "author": "ADONE core team <info@adone.io>",
   "devDependencies": {
     "eslint": "latest",
