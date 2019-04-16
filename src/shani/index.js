@@ -1539,7 +1539,7 @@ export class Engine {
                 const content = contentCache.get(filename);
                 module._compile(content, filename);
             };
-            const transpile = adone.module.Module.transforms.transpile(this.transpilerOptions);
+            const transpile = adone.module.transform.compiler(this.transpilerOptions);
             const transform = (content, filename) => {
                 if (!transpiledCache.has(filename)) {
                     transpiledCache.set(filename, transpile(content, filename));
