@@ -45,7 +45,7 @@ adone.app.run({
         let config = {};
         if (useConfig && await adone.fs.exists(configPath)) {
             config = adone.require(configPath);
-            if (config.__esModule) { // TODO: fix?
+            if (config.default) {
                 config = config.default;
             }
         }
@@ -66,6 +66,7 @@ adone.app.run({
             callGc: config.options.callGc,
             dryRun: config.options.dryRun
         };
+        
         const engine = new Engine(shaniOptions);
         const exclusive = config.options.skip ? config.options.skip.split(",") : [];
         if (inclusive.length || exclusive.length) {

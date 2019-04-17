@@ -446,16 +446,6 @@ class Block {
     }
 }
 
-class TestModule extends adone.module.Module {
-    // use native require to require external modules
-    loadExtension(filename, extension) {
-        if (filename.includes("node_modules")) {
-            return this.exports = require(filename);
-        }
-        return super.loadExtension(filename, extension);
-    }
-}
-
 class Test {
     constructor(description, callback, block, runtimeContext, meta, engineOptions = {}, options = {}) {
         this.description = description;
@@ -1626,9 +1616,10 @@ export class Engine {
                     continue;
                 }
 
-                const m = new TestModule(path, {
-                    transform,
-                    loaders: { ".js": loader }
+                const m = new adone.module.Module(path, {
+                    transforms: [
+                        adone.module.transform.compiler()
+                    ]
                 });
 
                 global.$ = {};
