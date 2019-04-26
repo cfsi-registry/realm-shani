@@ -155,7 +155,7 @@ class Differ extends adone.event.Emitter {
                 this.emit("enter", "map");
                 const actualKeys = [...actual.keys()];
                 const expectedKeys = [...expected.keys()];
-                const allKeys = adone.util.unique([...actualKeys, ...expectedKeys]).sort();
+                const allKeys = adone.common.unique([...actualKeys, ...expectedKeys]).sort();
                 for (const key of allKeys) {
                     if (!expected.has(key)) {
                         this.emit("element", "delete", actual.get(key), key);
@@ -191,7 +191,7 @@ class Differ extends adone.event.Emitter {
                 this.emit("enter", "object", key);
                 const actualKeys = Object.keys(actual);
                 const expectedKeys = Object.keys(expected);
-                const allKeys = adone.util.unique([...actualKeys, ...expectedKeys]).sort();
+                const allKeys = adone.common.unique([...actualKeys, ...expectedKeys]).sort();
                 for (const key of allKeys) {
                     if (!(key in expected)) {
                         this.emit("element", "delete", actual[key], key);

@@ -1480,7 +1480,7 @@ export class Engine {
 
         const main = async (paths) => {
             if (this.perProcess) {
-                for (const path of (await adone.fs.glob(paths)).sort()) {
+                for (const path of (await adone.glob(paths)).sort()) {
                     const runner = new ExternalRunner(this, path);
                     await runner.startProcess();
                     executing = runner.start();
@@ -1591,7 +1591,7 @@ export class Engine {
 
             stub.stub(console, "log", "error", "debug", "info", "dir", "warn", "trace", "table");
 
-            for (const path of (await adone.fs.glob(paths)).sort()) {
+            for (const path of (await adone.glob(paths)).sort()) {
                 const context = this.context();
                 const topass = [
                     "describe", "context",
