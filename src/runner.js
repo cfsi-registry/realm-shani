@@ -14,7 +14,7 @@ const {
 
 const {
     is,
-    std: { path },
+    path,
     noop,
     util: { arrify }
 } = adone;

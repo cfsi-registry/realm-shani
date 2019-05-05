@@ -6,22 +6,5 @@
             "description": "Test framework",
             "subsystem": "lib"
         }
-    ],
-    "scheme": {
-        "shani": {
-            "description": "Testing framework",
-            "task": "transpile",
-            "src": "src/shani/**/*.js",
-            "dst": "lib/shani"
-        },
-        "command": {
-            "description": "CLI subsystem",
-            "task": "transpile",
-            "src": [
-                "src/index.js",
-                "src/runner.js"
-            ],
-            "dst": "lib"
-        }
-    }
+    ]
 }

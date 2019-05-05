@@ -840,7 +840,7 @@ class ExternalRunner {
     }
 
     async startProcess() {
-        this.proc = std.childProcess.fork(std.path.resolve(__dirname, "external_runner.js"), [adone.ROOT_PATH], {
+        this.proc = std.childProcess.fork(std.path.resolve(__dirname, "external_runner.js"), [adone.cwd], {
             stdio: ["inherit", "inherit", "inherit", "ipc"]
         });
         this.exitPromise = new Promise((resolve) => this.proc.once("exit", (code, signal) => resolve({ code, signal })));
@@ -1529,7 +1529,7 @@ export class Engine {
                 const content = contentCache.get(filename);
                 module._compile(content, filename);
             };
-            const transpile = adone.module.transform.compiler(this.transpilerOptions);
+            const transpile = adone.module.transform.babel(this.transpilerOptions);
             const transform = (content, filename) => {
                 if (!transpiledCache.has(filename)) {
                     transpiledCache.set(filename, transpile(content, filename));
@@ -1618,7 +1618,7 @@ export class Engine {
 
                 const m = new adone.module.Module(path, {
                     transforms: [
-                        adone.module.transform.compiler()
+                        adone.module.transform.babel()
                     ]
                 });
 

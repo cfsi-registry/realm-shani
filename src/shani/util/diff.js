@@ -126,7 +126,7 @@ class Differ extends adone.event.Emitter {
                 break;
             }
             case "string": {
-                const diff = adone.diff.chars(actual, expected);
+                const diff = adone.diff.diffChars(actual, expected);
                 const mask = {
                     delete: [],
                     add: []

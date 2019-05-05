@@ -4,7 +4,8 @@ const {
         mainCommand
     },
     cli,
-    std: { path, childProcess },
+    path,
+    std: { childProcess }
 } = adone;
 
 export default class ShaniCLI extends Subsystem {
@@ -63,7 +64,7 @@ export default class ShaniCLI extends Subsystem {
             },
             {
                 name: "--inspect",
-                help: "run node inspector at the given port and set a breakpoint on the first line",
+                help: "Run node inspector at the given port and set a breakpoint on the first line",
                 nargs: "?",
                 default: 9229,
                 group: "flow",
@@ -205,7 +206,8 @@ export default class ShaniCLI extends Subsystem {
         if (opts.has("inspect")) {
             execArgv.push(`--inspect=${opts.get("inspect")}`, "--inspect-brk");
         }
-        const proc = childProcess.fork(path.resolve(__dirname, "runner.js"), [adone.ROOT_PATH], {
+
+        const proc = childProcess.fork(path.resolve(__dirname, "runner.js"), [adone.cwd], {
             stdio: ["inherit", "inherit", "inherit", "ipc"],
             execArgv
         });
@@ -217,8 +219,8 @@ export default class ShaniCLI extends Subsystem {
             configPath,
             configOptions,
             inclusive,
-            startCoverServer: opts.has("start-cover-server") && opts.get("start-cover-server"),
-            printCoverStats: opts.has("print-cover-stats") && opts.get("print-cover-stats"),
+            // startCoverServer: opts.has("start-cover-server") && opts.get("start-cover-server"),
+            // printCoverStats: opts.has("print-cover-stats") && opts.get("print-cover-stats"),
             root: process.cwd()
         });
 
